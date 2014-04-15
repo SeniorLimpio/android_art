@@ -412,7 +412,7 @@ void RegisterLine::CheckLiteralOp(const Instruction* inst,
 }
 
 void RegisterLine::PushMonitor(uint32_t reg_idx, int32_t insn_idx) {
-#ifndef WORKAROUND_BUG_61916
+#if 0
   const RegType& reg_type = GetRegisterType(reg_idx);
   if (!reg_type.IsReferenceTypes()) {
     verifier_->Fail(VERIFY_ERROR_BAD_CLASS_HARD) << "monitor-enter on non-object (" << reg_type << ")";
@@ -426,7 +426,7 @@ void RegisterLine::PushMonitor(uint32_t reg_idx, int32_t insn_idx) {
 }
 
 void RegisterLine::PopMonitor(uint32_t reg_idx) {
-#ifndef WORKAROUND_BUG_61916
+#if 0
   const RegType& reg_type = GetRegisterType(reg_idx);
   if (!reg_type.IsReferenceTypes()) {
     verifier_->Fail(VERIFY_ERROR_BAD_CLASS_HARD) << "monitor-exit on non-object (" << reg_type << ")";
@@ -471,7 +471,7 @@ bool RegisterLine::MergeRegisters(const RegisterLine* incoming_line) {
       line_[idx] = new_type.GetId();
     }
   }
-#ifndef WORKAROUND_BUG_61916
+#if 0
   if (monitors_.size() != incoming_line->monitors_.size()) {
     LOG(WARNING) << "mismatched stack depths (depth=" << MonitorStackDepth()
                  << ", incoming depth=" << incoming_line->MonitorStackDepth() << ")";
